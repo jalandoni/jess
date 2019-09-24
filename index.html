@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+   <head>
+      <title>Socket.IO chat</title>
+      <link rel="shortcut icon" href="favicon.ico">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="/index.css">
+   </head>
+   <body>
+      <div id="nickPage">
+         <h2>Fill in the nickname you want to be called</h2>
+         <center>
+            <input type="text" name="" id="nickname">
+            <input type="submit" class="btn btn-primary" value="Submit" id="sub" />
+         </center>
+      </div>
+      <div class="container">
+         <div id="online">
+            <h3>Online Users</h3>
+            <div id="users"></div>
+         </div>
+         <div>
+            <ul id="messages"></ul>
+         </div>
+         <form id="messageForm">
+            <div class="form-group">
+               <center>
+                  <label>Enter Message <input id="m" autocomplete="off" class="form-control"></input></label><br><br>
+                  <input type="submit" class="btn btn-primary" value="Send Message" id="send">
+               </center>
+            </div>
+         </form>
+      </div>
+  <!--     </div>
+      </div> -->
+      <script src="/socket.io/socket.io.js"></script>
+      <script src="https://code.jquery.com/jquery-1.11.1.js"></script> 
+      <script>
+         $(document).ready(function () {
+           var socket = io();
+           var messageSend = $("#send");
+           var message = $("#m");
+           var allUsers = $("#users");
+           var user = $("#nickname");
+         
+           
+           $('#sub').click(function(e){
+            e.preventDefault();        
+                      $("#nickPage").hide();
+                      $(".container").show();
+                socket.emit('new user',user.val(),function(data){
+
+         
+                });
+           });
+           socket.on('usernames',function(data){
+
+                var newUser  = '';
+                for(i = 0 ; i < data.length ; i++)
+                {
+                newUser += data[i] + '<br/>'
+                }
+                allUsers.html(newUser);
+                
+                });
+         
+           $('#send').click(function(e){
+             e.preventDefault();
+             socket.emit('send message', message.val());
+               message.val('');
+              return false;
+           }); 
+            socket.on('new message', function(data){
+           $('#messages').append('<li><b>'+ data.nick + ' :</b>'+ data.msg +'</li>');
+          });
+           
+         });
+      </script>
+   </body>
+</html>

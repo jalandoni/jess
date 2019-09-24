@@ -1,0 +1,50 @@
+body{
+    margin-top: 150px;
+	margin: 0; padding: 0; box-sizing: border-box; 
+    font: 13px Helvetica, Arial;
+    background-color: pink;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#nickPage{
+	display: block;
+}
+.container{
+	display: none;
+
+
+}
+#users{
+	
+	overflow-y: scroll; 
+	height:350;
+	width: 300px;
+	margin-top: 10px;
+	margin-left:25px;
+	border: 2px solid black;
+}
+.online{
+	margin-left: -170px;
+	margin-top: -50px;
+}
+#messageForm{
+	margin-left: 250px;
+	margin-top: 70px;
+}
+#m{
+	width:300px;
+	height:25px;
+}
+h3,h2,input,label{
+	color: blue;
+}
+#messages{
+	list-style-type: none;
+	width:500px;
+	height: 200px;
+	margin-left: 400px;
+	overflow: auto; 
+	border: 2px solid black;"
+}
